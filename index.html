@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipe dos Cão</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <div class="pincher">
+        <img src="pata.png" alt="">
+        <h1>Agendamento Banho e Tosa</h1>
+    </div>
+    <div class="bodercole">
+        <div>
+            <h3>Nome do Pet</h3>
+            <input type="text" id="nomepet" placeholder="Nome cachorro">
+            <h3>Raça do Pet</h3>
+            <input type="text" id="racapet" placeholder="Raça cachorro">
+            <h3>Dono do Pet</h3>
+            <input type="text" id="nomedono" placeholder="Dono do pet">
+            <h3>Numero</h3>
+            <input type="text" id="numdono" placeholder="Numero do Dono"> <br> <br> 
+            <button id="boxer">Agendar Banho/Tosa</button>
+        </div>
+        <div>
+            <table id="poddle">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nome do Pet</th>
+                        <th>Raça</th>
+                        <th>Dono do Pet</th>
+                        <th>Telefone</th>
+                        <th>Remover</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- As linhas serão adicionadas aqui -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        let idCounter = 1; // Contador para o ID
+
+        document.getElementById('boxer').addEventListener('click', function() {
+            // Captura os valores dos inputs
+            const nomepet = document.getElementById('nomepet').value;
+            const racapet = document.getElementById('racapet').value;
+            const nomedono = document.getElementById('nomedono').value;
+            const numdono = document.getElementById('numdono').value;
+
+            // Verifica se todos os campos estão preenchidos
+            if (nomepet && racapet && nomedono && numdono) {
+                // Cria uma nova linha na tabela
+                const tabela = document.querySelector('#poddle tbody');
+                const fila = document.createElement('tr');
+
+                fila.innerHTML = `
+                    <td>${idCounter++}</td>
+                    <td>${nomepet}</td>
+                    <td>${racapet}</td>
+                    <td>${nomedono}</td>
+                    <td>${numdono}</td>
+                    <td><button class="removeButton">Remover</button></td>
+                `;
+
+                tabela.appendChild(fila);
+
+                // Limpa os campos de entrada
+                document.getElementById('nomepet').value = '';
+                document.getElementById('racapet').value = '';
+                document.getElementById('nomedono').value = '';
+                document.getElementById('numdono').value = '';
+
+                // Adiciona evento de remoção à nova linha
+                fila.querySelector('.removeButton').addEventListener('click', function() {
+                    tabela.removeChild(fila);
+                });
+            } else {
+                alert('Por favor, preencha todos os campos.');
+            }
+        });
+    </script>
+</body>
+</html>
